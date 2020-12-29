@@ -1,0 +1,13 @@
+{
+  "appId": "io.ionic.starter",
+  "appName": "oka_firs_ionict",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "build",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
+  },
+  "cordova": {}
+}

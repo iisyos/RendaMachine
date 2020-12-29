@@ -1,0 +1,7 @@
+{
+  "name": "oka_firs_ionict",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
