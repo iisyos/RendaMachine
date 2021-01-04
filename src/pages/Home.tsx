@@ -7,37 +7,70 @@ import './Home.css'
 import { add, settings, share, person, arrowForwardCircle, arrowBackCircle, arrowUpCircle, logoVimeo, logoFacebook, logoInstagram, logoTwitter } from 'ionicons/icons';
 const Home: React.FC = () => {
 
-  class Toggle extends React.Component <{},{count:number}>{
-    constructor(props:any) {
-      super(props);
-      this.state = {
-          count: 0
-      }
-      this.doPlus = this.doPlus.bind(this);
+  function Square(props:any){
+    return <button className="square" onClick={props.onClick}>
+      {/* {props.value} */}
+    </button>
   }
 
-  doPlus(){
-    this.setState({count: this.state.count + 1})
-}
-  
-  
-    render() {
-      return (
+
+  class Board extends React.Component<{},{squares:any,xIsNext:boolean,counter:number}>{
+    constructor(props:any){
+      super(props);
+      this.state={
+        squares:Array(9).fill(null),
+        xIsNext: true,
+        counter:0
+      }
+    }
+    handleClick(i:any) {
+      // const squares = this.state.squares.slice();
+      // squares[i] =this.state.xIsNext? 'X':"O";
+      // this.setState({squares: squares,xIsNext:!this.state.xIsNext});
+      this.setState({counter:this.state.counter+1})
+    }
+    renderSquare(i:any){
+      return( <Square value={this.state.squares[i]} onClick={() => this.handleClick(i)} />);
+    }
+
+    render(){
+      const status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
+
+      return(
+        <div><div><h1 className="ion-padding">{this.state.counter}</h1></div>
+        <div className="inner">
+          
         <div>
-        <h1 className="greeting" onClick={this.doPlus}>{this.state.count}</h1>
-        <div className="ion-padding">
-        <a className="btn-circle-flat" onClick={this.doPlus}>+</a>
-        </div>
-        </div>
-        
-      );
+          <div className="board-row">
+            {this.renderSquare(0)}
+            {this.renderSquare(1)}
+            {this.renderSquare(2)}
+            </div>
+          <div className="board-row">
+            {this.renderSquare(3)}
+            {this.renderSquare(4)}
+            {this.renderSquare(5)}
+            </div>
+           <div className="board-row">
+            {this.renderSquare(6)}
+            {this.renderSquare(7)}
+            {this.renderSquare(8)}
+          </div></div>
+        </div></div>
+      )
     }
   }
-  
+
+  class Game extends React.Component{
+    render(){
+      return(
+        <div><Board/></div>
+      )
+    }
+  }
   ReactDOM.render(
-    <Toggle />,
-    document.getElementById('root')
-  );
+    <Game/>,document.getElementById('root')
+  )
 
   return (
     <IonPage>
