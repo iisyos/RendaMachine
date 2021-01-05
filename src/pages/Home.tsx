@@ -4,6 +4,7 @@ import { type } from 'os';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './Home.css'
+import { IonButton,IonGrid, IonRow, IonCol,IonRippleEffect } from '@ionic/react';
 import { add, settings, share, person, arrowForwardCircle, arrowBackCircle, arrowUpCircle, logoVimeo, logoFacebook, logoInstagram, logoTwitter } from 'ionicons/icons';
 const Home: React.FC = () => {
 
@@ -37,9 +38,19 @@ const Home: React.FC = () => {
       const status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
 
       return(
-        <div><div><h1 className="ion-padding">{this.state.counter}</h1></div>
+        <div>
+          <IonGrid>
+            <IonRow >
+              <IonCol size="8" class="text-center">
+               playing
+              </IonCol>
+              <IonCol>
+              <IonButton color="light" routerLink='/initial' class='round'>Quit</IonButton>
+              </IonCol>
+            </IonRow>
+          </IonGrid>
+          <div><h1 className="ion-padding">{this.state.counter}</h1></div>
         <div className="inner">
-          
         <div>
           <div className="board-row">
             {this.renderSquare(0)}
@@ -85,7 +96,6 @@ const Home: React.FC = () => {
         <IonIcon icon={add} />
       </IonFabButton>
       </IonFab>
-
       </IonContent>
     </IonPage>
   );

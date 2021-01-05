@@ -1,7 +1,7 @@
 .ion-padding {
    text-align: center;
-    margin-top: 5%;
-    font-size: 100px;
+    margin-top: 1%;
+    font-size: 60px;
 
   }
   
@@ -106,4 +106,10 @@
   .game-info {
     margin-left: 20px;
   }
-  
+  .text-center{
+    text-align:center;
+    font-size: 30px;
+  }
+  .round {
+    width: 100px;
+  }
