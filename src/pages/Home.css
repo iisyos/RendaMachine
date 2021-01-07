@@ -1,8 +1,14 @@
 .ion-padding {
    text-align: center;
     margin-top: 1%;
-    font-size: 60px;
+    font-size: 10vw;
 
+  }
+  @media screen and (min-width : 500px) {
+    .ion-padding {
+      font-size: 50px;
+        
+    }
   }
   
   .ion-padding strong {
@@ -70,17 +76,40 @@
   .square {
     background: #fff;
     border: 1px solid #999;
-    float: left;
-    font-size: 24px;
-    font-weight: bold;
-    line-height: 34px;
-    height: 100px;
-    margin-right: -1px;
-    margin-top: -1px;
-    padding: 0;
-    text-align: center;
-    width: 100px;
+    height: 95%;
+    width: 95%;
   }
+
+    .square2 {
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    height: 20vh;
+    padding: 0;
+    width:30vw
+  }
+  @media screen and (min-width : 1024px) {
+    .square2 {
+      height: 20vh;
+        
+    }
+  }
+  @media screen and (min-width : 1800px) {
+    .square2 {
+      height: 20vh;
+        
+    }
+  }
+  .wrapper {
+height: 1200px;
+}
+.child {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
   .inner{
     padding: 1em;
     position: absolute;
