@@ -20,7 +20,7 @@
     padding-top: 10%;
 }
 .ripple-parent {
-    position: relative;
+    position: relative; 
     overflow: hidden;
   }
   .round {
@@ -34,5 +34,9 @@
       --color: #222;
       --color-activated: white;
       --opacity: 1;
+    }
+
+    .toast{
+        --width:20%
     }
   

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import './initial.css';
 import {  IonLabel,IonInput,IonItem,IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import { IonButton,IonGrid, IonRow, IonCol,IonRippleEffect } from '@ionic/react';
+import { IonToast,IonButton,IonGrid, IonRow, IonCol,IonRippleEffect } from '@ionic/react';
 import { analytics, dice } from 'ionicons/icons';
 import { h } from 'ionicons/dist/types/stencil-public-runtime';
 import { Router, Route, withRouter, RouteComponentProps } from 'react-router';
@@ -12,11 +12,11 @@ import { Link, useHistory} from "react-router-dom";
 import Cookies from 'js-cookie'
 import { Plugins } from '@capacitor/core';
 const { Storage } = Plugins;
-
+let s:boolean=true;
 const Initial: React.FC<RouteComponentProps> =(props) =>{
-    let s:boolean=true;
+    
 
-
+    const [showToast1, setShowToast1] = useState(false);
     const [text, setText] = useState<string>();
 
     function Score_col(props:any){
@@ -47,17 +47,23 @@ const Initial: React.FC<RouteComponentProps> =(props) =>{
                 this.setState({score:score})
               }
           componentDidMount(){
+            console.log(s+"aaaaaa")
               this.getObject()
-              if(Cookies.get("name2") && this.state.initial){
+              if(Cookies.get("name2") && this.state.initial &&s){
                   console.log(text)
-                  if(text){Cookies.set("name2",text!)}
+                  if(text){
+                      Cookies.set("name2",text!)
+                    }
                   setText(Cookies.get("name2")!)
-                  console.log(this.state.initial)
+        
+                 
                   this.setState({initial:false})
-                  console.log(this.state.initial)
-                  console.log(s+"aaaaaa")
+                  
                   s=false;
               }
+               console.log(this.state.initial)
+              console.log(this.state.initial)
+                 console.log(s+"aaaaaa") 
     // setText(Cookies.get("name2"))
     Cookies.get("name2")??console.log(text+"aaaaaaaaaaaaaa")
     // Cookies.get("name2")??console.log("qqqqqqqqqqqqqqqqq")
@@ -105,10 +111,18 @@ const Initial: React.FC<RouteComponentProps> =(props) =>{
                   <IonButton color="primary" className="round">endless</IonButton>
     </IonRow>
     <IonRow class="ion-justify-content-center">
-    <IonButton class="custom" onClick={()=> NextPage()}>PLAY</IonButton>
+    <IonButton class="custom" onClick={()=> text?NextPage():setShowToast1(true)}>PLAY</IonButton>
     </IonRow>
           </IonGrid>
+          <IonToast 
+        isOpen={showToast1}
+        onDidDismiss={() => setShowToast1(false)}
+        message="Enter Player Name"
+        duration={1000}
+
+      />
       </IonContent>
+
       );
 }
 export default Initial;
