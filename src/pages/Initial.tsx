@@ -18,7 +18,8 @@ const Initial: React.FC<RouteComponentProps> =(props) =>{
 
     const [showToast1, setShowToast1] = useState(false);
     const [text, setText] = useState<string>();
-
+    const [mode,setMode]=useState<number>();
+ 
     function Score_col(props:any){
         return (
             <IonCol className="text-center">
@@ -30,9 +31,9 @@ const Initial: React.FC<RouteComponentProps> =(props) =>{
         )
 
     }
-    
+
     class Page extends React.Component<{},{score:number,initial:boolean}>{
-        
+
         constructor(props:any){
             super(props);
             this.state={
@@ -40,34 +41,37 @@ const Initial: React.FC<RouteComponentProps> =(props) =>{
                 initial:true
             }
           }
+  
             async getObject() {
                 const ret = await Storage.get({ key: Cookies.get("namea")! });
                 console.log(JSON.parse(ret!.value!)+"-------")
                 const score = JSON.parse(ret!.value!)?.score??0;
                 this.setState({score:score})
               }
+              async name_change(){
+                     const ret = await Storage.get({ key: text!});
+                    console.log(JSON.parse(ret!.value!)+"-------")
+                    const score = JSON.parse(ret!.value!)?.score??0;
+                if(ret){
+                    this.setState({score:score})
+            
+                }
+              }
           componentDidMount(){
             console.log(s+"aaaaaa")
               this.getObject()
-              if(Cookies.get("name2") && this.state.initial &&s){
-                  console.log(text)
-                  if(text){
-                      Cookies.set("name2",text!)
-                    }
+              if(Cookies.get("name2") && this.state.initial && s){
+                  console.log(s)
+                  if(text){Cookies.set("name2",text!)}
                   setText(Cookies.get("name2")!)
-        
-                 
                   this.setState({initial:false})
-                  
                   s=false;
+                  setMode(parseInt(Cookies.get("mode")!,10))
               }
-               console.log(this.state.initial)
-              console.log(this.state.initial)
-                 console.log(s+"aaaaaa") 
-    // setText(Cookies.get("name2"))
-    Cookies.get("name2")??console.log(text+"aaaaaaaaaaaaaa")
-    // Cookies.get("name2")??console.log("qqqqqqqqqqqqqqqqq")
-    // Cookies.get("name2")?console.log("ppppppppppppqqqqqqqqqqqqqqqqq")
+              this.name_change()
+              
+             
+    
           }
         render(){
             return(
@@ -81,12 +85,14 @@ const Initial: React.FC<RouteComponentProps> =(props) =>{
     }
     const history = useHistory();
     function NextPage(){
-        history.push({
+        if(text && mode){history.push({
             pathname: '/home',
             state: { name: text }
-          })
+          })}
           Cookies.set("namea",text!)
+          Cookies.set("mode",mode?.toString()!)
     }
+
 
     return (
         <IonContent>
@@ -102,13 +108,14 @@ const Initial: React.FC<RouteComponentProps> =(props) =>{
             <IonCol size="8">
                      <IonItem>
                      <IonInput class="ion-text-center" value={text} placeholder="Player Name" onIonChange={e => setText(e.detail.value!)}></IonInput>
-          </IonItem>
+          </IonItem
+          >
                 </IonCol>
                 </IonRow>
                 <IonRow class="ion-justify-content-around">
-                  <IonButton color="primary" className="round">10s</IonButton>
-                  <IonButton color="primary" className="round">60s</IonButton>
-                  <IonButton color="primary" className="round">endless</IonButton>
+                  <IonButton color={mode==0?"primary":"medium"} className="round" onClick={()=>setMode(0)}>10s</IonButton>
+                  <IonButton color={mode==1?"primary":"medium"} className="round" onClick={()=>setMode(1)}>60s</IonButton>
+                  <IonButton color={mode==2?"primary":"medium"} className="round" onClick={()=>setMode(2)}>endless</IonButton>
     </IonRow>
     <IonRow class="ion-justify-content-center">
     <IonButton class="custom" onClick={()=> text?NextPage():setShowToast1(true)}>PLAY</IonButton>
