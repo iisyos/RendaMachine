@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import './initial.css';
 import {  IonLabel,IonInput,IonItem,IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import { IonToast,IonButton,IonGrid, IonRow, IonCol,IonRippleEffect } from '@ionic/react';
-import { analytics, dice } from 'ionicons/icons';
+import { alarmSharp, analytics, dice } from 'ionicons/icons';
 import { h } from 'ionicons/dist/types/stencil-public-runtime';
 import { Router, Route, withRouter, RouteComponentProps } from 'react-router';
 import createBrowserHistory from 'history/createBrowserHistory';
@@ -19,42 +19,97 @@ const Initial: React.FC<RouteComponentProps> =(props) =>{
     const [showToast1, setShowToast1] = useState(false);
     const [text, setText] = useState<string>();
     const [mode,setMode]=useState<number>();
+    let ten_list=[]
+    let six_list=[]
+    let endless_list=[]
+
  
     function Score_col(props:any){
         return (
-            <IonCol className="text-center">
+            <IonCol className="text-center top">
                 <div style={{color:'red'}}>
                     {props.value}
                 </div>
-                <div>{props.score}</div>
+                <div >{props.score}</div>
             </IonCol>
         )
 
     }
+    class Board extends React.Component<{},{ten_list:any[],six_list:any[],endless_list:any[]}>{
+          constructor(props:any){
+            super(props);
+            this.state={
+                ten_list:[],
+                six_list:[],
+                endless_list:[]
 
-    class Page extends React.Component<{},{score:number,initial:boolean}>{
+            }
+          }
+          async getObject() {
+             const ret = await Storage.get({ key: text!});
+            console.log(JSON.parse(ret!.value!)+"-------")
+            const score = JSON.parse(ret!.value!);
+            for(var i in score){
+                this.state.ten_list.push({name:text!,score:score[i]?.score??0})
+                this.state.six_list.push({name:text!,score:score[i]?.six_score??0})
+                this.state.endless_list.push({name:text!,score:score[i]?.endless_card??0})
+            }
+            this.state.ten_list.sort( function(a, b) {
+ 
+                return a.score < b.score ? 1 : -1;
+             
+            })
+            this.state.ten_list.sort( function(a, b) {
+ 
+                return a.score < b.score ? 1 : -1;
+             
+            })
+            this.state.ten_list.sort( function(a, b) {
+ 
+                return a.score < b.scpre ? 1 : -1;
+             
+            })
+
+          }
+    
+          componentDidMount(){
+              this.getObject()
+
+          }
+
+        render(){
+            return <div>
+                
+            </div>
+        }
+    }
+    
+
+    class Page extends React.Component<{},{score:number,initial:boolean,six_score:number,endless:number}>{
 
         constructor(props:any){
             super(props);
             this.state={
                 score:0,
-                initial:true
+                initial:true,
+                six_score:0,
+                endless:0
             }
           }
-  
+
             async getObject() {
                 const ret = await Storage.get({ key: Cookies.get("namea")! });
                 console.log(JSON.parse(ret!.value!)+"-------")
-                const score = JSON.parse(ret!.value!)?.score??0;
-                this.setState({score:score})
+                const score = JSON.parse(ret!.value!);
+                this.setState({score:score?.score??0,six_score:score?.six_score??0,endless:score?.endless_score??0})
               }
               async name_change(){
                      const ret = await Storage.get({ key: text!});
                     console.log(JSON.parse(ret!.value!)+"-------")
-                    const score = JSON.parse(ret!.value!)?.score??0;
+                    const score = JSON.parse(ret!.value!);
                 if(ret){
-                    this.setState({score:score})
-            
+                    this.setState({score:score?.score??0,six_score:score?.six_score??0,endless:score?.endless_score??0})
+
                 }
               }
           componentDidMount(){
@@ -69,23 +124,20 @@ const Initial: React.FC<RouteComponentProps> =(props) =>{
                   setMode(parseInt(Cookies.get("mode")!,10))
               }
               this.name_change()
-              
-             
-    
           }
         render(){
             return(
                 <IonRow>
-                    <Score_col value="10s" score={this.state.score.toString()}/>
-                    <Score_col value="60s"/>
-                    <Score_col value="endless"/>
+                    <Score_col value="10s"  score={this.state.score.toString()}/>
+                    <Score_col value="60s"  score={this.state.six_score.toString()}/>
+                    <Score_col value="endless"  score={this.state.endless.toString()}/>
                 </IonRow>
             )
         }
     }
     const history = useHistory();
     function NextPage(){
-        if(text && mode){history.push({
+        if(text && mode!== undefined){history.push({
             pathname: '/home',
             state: { name: text }
           })}
@@ -94,10 +146,12 @@ const Initial: React.FC<RouteComponentProps> =(props) =>{
     }
 
 
+
     return (
-        <IonContent>
+        <IonContent >
+            <IonPage className="back">
         <IonGrid>
-            <Page/>
+            <Page />
             <IonRow className="text-center">
                 <IonCol className="title">
                     <div>Renda</div>
@@ -107,21 +161,23 @@ const Initial: React.FC<RouteComponentProps> =(props) =>{
             <IonRow className="ion-justify-content-center">
             <IonCol size="8">
                      <IonItem>
-                     <IonInput class="ion-text-center" value={text} placeholder="Player Name" onIonChange={e => setText(e.detail.value!)}></IonInput>
-          </IonItem
-          >
+                     <IonInput class="ion-text-center top" value={text} placeholder="Player Name" onIonChange={e => setText(e.detail.value!)}></IonInput>
+          </IonItem>
                 </IonCol>
                 </IonRow>
                 <IonRow class="ion-justify-content-around">
-                  <IonButton color={mode==0?"primary":"medium"} className="round" onClick={()=>setMode(0)}>10s</IonButton>
-                  <IonButton color={mode==1?"primary":"medium"} className="round" onClick={()=>setMode(1)}>60s</IonButton>
-                  <IonButton color={mode==2?"primary":"medium"} className="round" onClick={()=>setMode(2)}>endless</IonButton>
+                  <IonButton color={mode==0?"primary":"medium"} className="round top" onClick={()=>setMode(0)}>10s</IonButton>
+                  <IonButton color={mode==1?"primary":"medium"} className="round top" onClick={()=>setMode(1)}>60s</IonButton>
+                  <IonButton color={mode==2?"primary":"medium"} className="round top" onClick={()=>setMode(2)}>endless</IonButton>
     </IonRow>
     <IonRow class="ion-justify-content-center">
-    <IonButton class="custom" onClick={()=> text?NextPage():setShowToast1(true)}>PLAY</IonButton>
+    <IonButton class="custom top"  onClick={()=> text?NextPage():setShowToast1(true)}>PLAY</IonButton>
     </IonRow>
-          </IonGrid>
-          <IonToast 
+    <IonRow>
+        
+    </IonRow>
+          </IonGrid></IonPage>
+          <IonToast
         isOpen={showToast1}
         onDidDismiss={() => setShowToast1(false)}
         message="Enter Player Name"

@@ -75,18 +75,27 @@
   
   .square {
     background: #fff;
-    border: 1px solid #999;
+   
     height: 95%;
     width: 95%;
+    
+    display: inline-block;
+    vertical-align: middle;
+    margin: 5px 6px;
   }
 
     .square2 {
-    background: #fff;
+    background: rgb(214, 239, 245);
     display: flex;
-    justify-content: center;
+   
     height: 20vh;
-    padding: 0;
-    width:30vw
+
+    width:30vw;
+    position: relative;
+    display: table-cell;
+    vertical-align: middle;
+
+    
   }
   @media screen and (min-width : 1024px) {
     .square2 {
@@ -131,7 +140,11 @@ height: 1200px;
     display: flex;
     flex-direction: row;
   }
-  
+  .back{
+    background-image:url(https://www.sozailab.jp/db_img/sozai/59030/b489ebe98cfb23701d0806c0f14b05de.jpg);
+    background-size: contain;
+}
+
   .game-info {
     margin-left: 20px;
   }
@@ -142,3 +155,6 @@ height: 1200px;
   .round {
     width: 100px;
   }
+  .top{
+    font-family: cursive
+}

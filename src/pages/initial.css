@@ -18,6 +18,13 @@
 .title{
     font-size: 40px;
     padding-top: 10%;
+    font-family: cursive
+}
+.back{
+    background-image:url(https://www.sozailab.jp/db_img/sozai/59030/b489ebe98cfb23701d0806c0f14b05de.jpg);
+}
+.top{
+    font-family: cursive
 }
 .ripple-parent {
     position: relative; 
