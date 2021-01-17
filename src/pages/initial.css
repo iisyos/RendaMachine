@@ -105,8 +105,9 @@
 }
 
 .title {
-    font-size: 40px;
-    font-family: cursive
+    font-size: 50px;
+    font-family: cursive;
+    -webkit-text-stroke: 0.3px #000 ;
 }
 
 .back {
@@ -114,7 +115,19 @@
 }
 
 .top {
-    font-family: cursive
+
+    font-family: fantasy;
+    -webkit-text-stroke: 0.1px #000;
+    font-size: 200x;
+}
+.score{
+    color:black;
+    
+    font-family:fantasy;
+
+    -webkit-text-stroke: 0.6px;
+    font-size: 40px;
+
 }
 
 .ripple-parent {
@@ -128,8 +141,8 @@
 
 .custom {
     width: 92vw;
-    --background: lightpink;
-    --background-hover: #ffb6c1;
+    --background: white;
+    --background-hover: black;
     --background-activated: green;
     --color: #222;
     --color-activated: white;

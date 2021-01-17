@@ -15,26 +15,32 @@ import { Plugins } from '@capacitor/core';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "simplebar/dist/simplebar.min.css";
 import { inherits } from 'util';
+import Paper from '@material-ui/core/Paper';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TablePagination from '@material-ui/core/TablePagination';
+import TableRow from '@material-ui/core/TableRow';
+import { makeStyles } from '@material-ui/core/styles';
+
 const { Storage } = Plugins;
 let s: boolean = true;
 const Initial: React.FC<RouteComponentProps> = (props) => { 
 
-
     const [showToast1, setShowToast1] = useState(false);
     const [text, setText] = useState<string>();
     const [mode, setMode] = useState<number>();
-    let ten_list = []
-    let six_list = []
-    let endless_list = []
 
 
     function Score_col(props: any) {
         return (
-            <IonCol className="text-center top">
-                <div style={{ color: 'red' }}>
+            <IonCol className="text-center">
+                <div className="top" style={{ color: 'yellow'  }}>
                     {props.value}
                 </div>
-                <div >{props.score}</div>
+                <div className="score">{props.score}</div>
             </IonCol>
         )
 
@@ -93,6 +99,8 @@ const Initial: React.FC<RouteComponentProps> = (props) => {
 
         
       LeftColumn = () => {
+
+        
         return (
           <div
             id="left-column"
@@ -104,12 +112,33 @@ const Initial: React.FC<RouteComponentProps> = (props) => {
           >
             <SimpleBar className="box2"
             >
-              <h3>Left column</h3>
+        <Table stickyHeader aria-label="sticky table">
+          <TableHead>
+            <TableRow>
+            <TableCell>
+                  {[1,2,3]}
+                </TableCell>
+                 <TableCell>
+                  {[1,2,3]}
+                </TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+                
+                      {mode == 0 && this.state.ten_list.map((value) =><TableRow> <TableCell>{value.name!}</TableCell> <TableCell>{ value.score}</TableCell></TableRow>)}
+                      {/* {mode == 0 && this.state.ten_list.map((value) => 
+                      {value.name! + value.score})} */}
+                
+            
+          </TableBody>
+        </Table>
+
+              {/* <h3>Left column</h3>
               <ul id="list" className="pl-4">
                 {Array.from(new Array(20), (_, index) => (
                   <li key={index}>item {String(index + 1).padStart(2)}</li>
                 ))}
-              </ul>
+              </ul> */}
             </SimpleBar>
           </div>
         );
@@ -119,7 +148,6 @@ const Initial: React.FC<RouteComponentProps> = (props) => {
             console.log(this.state.endless_list)
             return (
                 <div className="box" >
-                    <table></table>
                   <div><this.LeftColumn/></div>
                 </div>
               );
