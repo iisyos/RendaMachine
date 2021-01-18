@@ -1,41 +1,44 @@
 .ion-padding {
-   text-align: center;
+    text-align: center;
     margin-top: 1%;
     font-size: 10vw;
+}
 
-  }
-  @media screen and (min-width : 500px) {
+@media screen and (min-width: 500px) {
     .ion-padding {
-      font-size: 50px;
-        
+        font-size: 50px;
     }
-  }
-  
-  .ion-padding strong {
+}
+
+.ion-padding strong {
     font-size: 20px;
     line-height: 26px;
-  }
-  
-  .ion-padding p {
+}
+
+.ion-padding p {
     font-size: 16px;
     line-height: 22px;
     color: #8c8c8c;
     margin: 0;
-  }
-  
-  .ion-padding a {
+}
+
+.aaa {
+    height: 50px;
+}
+
+.ion-padding a {
     text-decoration: none;
-  }
+}
 
-  .greeting{
-      position: absolute;
-      top: 100px;
-      right: 50%;
-      text-align: center;
-     font-size: large; 
-  }
+.greeting {
+    position: absolute;
+    top: 100px;
+    right: 50%;
+    text-align: center;
+    font-size: large;
+}
 
-  .btn-circle-flat {
+.btn-circle-flat {
     display: inline-block;
     text-decoration: none;
     background: #87befd;
@@ -48,113 +51,115 @@
     overflow: hidden;
     transition: .4s;
     cursor: pointer;
-  }
-  
-  .btn-circle-flat:hover {
-    background: #668ad8;
-  }
+}
 
-  body {
+.btn-circle-flat:hover {
+    background: #668ad8;
+}
+
+body {
     font: 14px "Century Gothic", Futura, sans-serif;
     margin: 20px;
-  }
-  
-  ol, ul {
+}
+
+ol,
+ul {
     padding-left: 30px;
-  }
-  
-  .board-row:after {
+}
+
+.board-row:after {
     clear: both;
     content: "";
     display: table;
-  }
-  
-  .status {
+}
+
+.status {
     margin-bottom: 10px;
-  }
-  
-  .square {
+}
+
+.square {
     background: #fff;
-   
     height: 95%;
     width: 95%;
-    
     display: inline-block;
     vertical-align: middle;
     margin: 5px 6px;
-  }
+}
 
-    .square2 {
+.square2 {
     background: rgb(214, 239, 245);
     display: flex;
-   
     height: 20vh;
-
-    width:30vw;
+    width: 30vw;
     position: relative;
     display: table-cell;
     vertical-align: middle;
+}
 
-    
-  }
-  @media screen and (min-width : 1024px) {
+@media screen and (min-width: 1024px) {
     .square2 {
-      height: 20vh;
-        
+        height: 20vh;
     }
-  }
-  @media screen and (min-width : 1800px) {
-    .square2 {
-      height: 20vh;
-        
-    }
-  }
-  .wrapper {
-height: 1200px;
 }
+
+@media screen and (min-width: 1800px) {
+    .square2 {
+        height: 20vh;
+    }
+}
+
+.wrapper {
+    height: 1200px;
+}
+
 .child {
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
 }
-  .inner{
+
+.inner {
     padding: 1em;
     position: absolute;
     top: 50%;
     left: 50%;
     margin-right: -50%;
-    transform: translate(-50%, -50%) }
-  
-  .square:focus {
-    outline: none;
+    transform: translate(-50%, -50%)
+}
 
-  }
-  
-  .kbd-navigation .square:focus {
+.square:focus {
+    outline: none;
+}
+
+.kbd-navigation .square:focus {
     background: #ddd;
-  }
-  
-  .game {
+}
+
+.game {
     display: flex;
     flex-direction: row;
-  }
-  .back{
-    background-image:url(https://www.sozailab.jp/db_img/sozai/59030/b489ebe98cfb23701d0806c0f14b05de.jpg);
+}
+
+.back {
+    background-image: url(https://www.sozailab.jp/db_img/sozai/59030/b489ebe98cfb23701d0806c0f14b05de.jpg);
     background-size: contain;
 }
 
-  .game-info {
+.game-info {
     margin-left: 20px;
-  }
-  .text-center{
-    text-align:center;
+}
+
+.text-center {
+    text-align: center;
     font-size: 30px;
-  }
-  .round {
+}
+
+.round {
     width: 100px;
-  }
-  .top{
+}
+
+.top {
     font-family: cursive
 }

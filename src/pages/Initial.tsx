@@ -24,6 +24,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import { makeStyles } from '@material-ui/core/styles';
+import { yellow } from '@material-ui/core/colors';
 
 const { Storage } = Plugins;
 let s: boolean = true;
@@ -112,24 +113,26 @@ const Initial: React.FC<RouteComponentProps> = (props) => {
           >
             <SimpleBar className="box2"
             >
-        <Table stickyHeader aria-label="sticky table">
+        <Table stickyHeader aria-label="sticky table ">
           <TableHead>
-            <TableRow>
-            <TableCell>
-                  {[1,2,3]}
+            <TableRow >
+                <TableCell className={''+' rank aaa'}>
+                  rank
                 </TableCell>
-                 <TableCell>
-                  {[1,2,3]}
+            <TableCell className={'' +' name'+' aaa'}>
+                  Player Name
+                </TableCell>
+                 <TableCell className={""+" scores aaa"}>
+                  Score
                 </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-                
-                      {mode == 0 && this.state.ten_list.map((value) =><TableRow> <TableCell>{value.name!}</TableCell> <TableCell>{ value.score}</TableCell></TableRow>)}
-                      {/* {mode == 0 && this.state.ten_list.map((value) => 
-                      {value.name! + value.score})} */}
-                
-            
+
+                      {mode == 0 && this.state.ten_list.map((value,index) =><TableRow> <TableCell className={(index==0?'pa-0 first':index==1?'silver second':index==2?'blo third' :'')+' rank'} >{index+1}</TableCell><TableCell className={(index==0?' first':index==1?' second':index==2?' third' :'') +" name"}>{value.name!}</TableCell> <TableCell className={(index==0?' first':index==1?' second':index==2?' third' :'') +" scores"}>{ value.score}</TableCell></TableRow>)}
+                      {mode == 1 && this.state.six_list.map((value,index) =><TableRow> <TableCell className={(index==0?'pa-0 first':index==1?'silver second':index==2?'blo third' :'')+' rank'}>{index+1}</TableCell><TableCell className={(index==0?' first':index==1?' second':index==2?' third' :'')  +" name"}>{value.name!}</TableCell> <TableCell className={(index==0?' first':index==1?' second':index==2?' third' :'') +" scores"}>{ value.score}</TableCell></TableRow>)}
+                      {mode == 2 && this.state.endless_list.map((value,index) =><TableRow> <TableCell className={(index==0?'pa-0 first':index==1?'silver second':index==2?'blo third' :'')+' rank'}>{index+1}</TableCell><TableCell className={(index==0?' first':index==1?' second':index==2?' third' :'')  +" name"}>{value.name!}</TableCell> <TableCell className={(index==0?' first':index==1?' second':index==2?' third' :'') +" scores"}>{ value.score}</TableCell></TableRow>)}
+
           </TableBody>
         </Table>
 
@@ -246,9 +249,9 @@ const Initial: React.FC<RouteComponentProps> = (props) => {
                         </IonCol>
                     </IonRow>
                     <IonRow class="ion-justify-content-around">
-                        <IonButton color={mode == 0 ? "primary" : "medium"} className="round top" onClick={() => setMode(0)}>10s</IonButton>
-                        <IonButton color={mode == 1 ? "primary" : "medium"} className="round top" onClick={() => setMode(1)}>60s</IonButton>
-                        <IonButton color={mode == 2 ? "primary" : "medium"} className="round top" onClick={() => setMode(2)}>endless</IonButton>
+                        <IonButton color={mode == 0 ? "primary" : "medium"} className="round top bbb" onClick={() => setMode(0)}>10s</IonButton>
+                        <IonButton color={mode == 1 ? "primary" : "medium"} className="round top bbb" onClick={() => setMode(1)}>60s</IonButton>
+                        <IonButton color={mode == 2 ? "primary" : "medium"} className="round top bbb" onClick={() => setMode(2)}>endless</IonButton>
                     </IonRow>
                     <IonRow class="ion-justify-content-center">
                         <IonButton class="custom top" onClick={() => text ? NextPage() : setShowToast1(true)}>PLAY</IonButton>

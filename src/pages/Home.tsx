@@ -188,7 +188,7 @@ const Home: React.FC<PageProps> = (props) => {
                 {Cookies.get("mode")=="2"?"ENDLESS":this.state.trigger == 0 ? "Press any button" : this.state.trigger == 2 ? "Finish" : this.toText(this.state.seconds, this.state.milliseconds)}
               </IonCol>
               <IonCol>
-                <IonButton color="light" routerLink="/initial" class='round top' onClick={() => this.setScore()}>Quit</IonButton>
+                <IonButton color="light" routerLink="/initial" class='round top aaa' onClick={() => this.setScore()}>Quit</IonButton>
               </IonCol>
             </IonRow>
             <IonRow class="ion-justify-content-center"><div><h1 className="ion-padding top">{this.state.counter}</h1></div></IonRow>
